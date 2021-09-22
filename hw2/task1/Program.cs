@@ -13,7 +13,7 @@ namespace task1
             this.key = key;
             this.value = value;
         }
-
+        // публичные методы и свойства  лучше всегда начинать с заглавной буквы
         public K getKey()
         {
             return key;
@@ -33,10 +33,12 @@ namespace task1
     class HashTable<K, T>
     {
         const int maxSize = 10007;
-        const int mod = maxSize;
+        const int mod = maxSize; // для чего тут дублирование константы maxSize?
         Pair<K, T>[] table = new Pair<K, T>[maxSize];
-        int[] used = new int[maxSize];
+        int[] used = new int[maxSize]; // можно отказаться от этого массива и использовать только table. такой массив - довольно дорогое удовольствие
         
+        // GetHashCode() возвращает int, который является знаковым целым.
+        // может получиться так, что ответом будет отрицательнео число, которое далее используется в качестве индекса в массиве
         private int getHash(K key)
         {
             return (key.GetHashCode() % mod + mod) % mod;
@@ -46,6 +48,8 @@ namespace task1
         {
             int hash = getHash(key);
             var p = new Pair<K, T>(key, val);
+            // что, если мест свободных в массиве больше не осталось? тогда мы попадем в вечный цикл
+            // тут необходимо динамическое расширение массива
             while(used[hash] != 0)
             {
                 if(table[hash].Equals(p))
