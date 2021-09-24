@@ -15,6 +15,10 @@ namespace task3
 
         private static int GCD(int a, int b)
         {
+            if (a < 0)
+                a = -a;
+            if (b < 0)
+                b = -b;
             while (a != 0 && b != 0)
             {
                 if (a < b)
@@ -59,7 +63,7 @@ namespace task3
             var s = new Simpl();
             Debug.Assert(s.Simplify("4/6") == "2/3");
             Debug.Assert(s.Simplify("10/11") == "10/11");
-            Debug.Assert(s.Simplify("100/400") == "1/4");            
+            Debug.Assert(s.Simplify("-100/400") == "-1/4");            
             Debug.Assert(s.Simplify("4/2") == "2");
         }
     }
