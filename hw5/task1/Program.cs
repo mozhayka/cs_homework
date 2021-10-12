@@ -8,7 +8,7 @@ namespace task1
     {
         public event newPost Poster;
 
-        private string name = "Hello";
+        private string name = "poster ?";
 
         public Publisher(string text)
         {
