@@ -5,7 +5,6 @@ namespace task4
 {
     class Hamster : IComparable
     {
-        private Random rand = new Random();
         public enum Color
         {
             white,
@@ -13,9 +12,8 @@ namespace task4
             black
         }
 
-        private Color colour;
-
-        private struct wool
+        // названия классов и стрктур лучше всегда начинать с заглавной буквы, даже если это внутренняя закрытая структура
+	private struct Wool
         {
             public int fluffiness;
             public wool(int fluffiness)
@@ -23,9 +21,12 @@ namespace task4
                 this.fluffiness = fluffiness;
             }
         }
-        private wool fur;
 
-        int weight, age, height;
+        private readonly Random rand = new Random();
+
+        private Color colour;
+        private Wool fur;
+        private int weight, age, height;
 
         public Hamster(Color colour, int fluffiness, int weight, int age, int height)
         {
@@ -39,7 +40,7 @@ namespace task4
         public Hamster()
         {
             colour = getRandomColor();
-            fur = new wool(rand.Next(0, 10));
+            fur = new Wool(rand.Next(0, 10));
             weight = rand.Next(1, 10);
             age = rand.Next(0, 5);
             height = rand.Next(10, 20);
@@ -82,6 +83,7 @@ namespace task4
         {
             return $"Hamster fluffiness = {fur.fluffiness}, color = {colour}, weight = {weight}, age = {age}, height = {height}";
         }
+
         private int cmpColor(Hamster h)
         {
             if(h.colour == colour)
@@ -90,6 +92,7 @@ namespace task4
                 return -1;
             return 1;
         }
+
         private Color getRandomColor()
         {
             int color = rand.Next(0, 3);
@@ -106,6 +109,7 @@ namespace task4
             }
         }
     }
+
     class Program
     {
         static void Main(string[] args)
@@ -115,7 +119,9 @@ namespace task4
             {
                 list.Add(new Hamster());
             }
+
             list.Sort();
+
             foreach (var i in list)
                 Console.WriteLine(i);
         }

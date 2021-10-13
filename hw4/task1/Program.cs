@@ -2,18 +2,26 @@
 
 namespace task1
 {
+// вставляйте пустые строки между логическими блоками
+// также в классе обычно идут закрытые поля, а потом открытые свойства
+
     class Car
     {
+        // лучше придерживаться caml нотации. тогда поле будет названо isStudded
         bool is_studded;
         public bool IsStudded { get { return is_studded; } set { is_studded = value; } }
+        // enum - это структура. если она публичная, должна называться с заглавной буквы
+        // размещать определения всех подтипов лучше в начале класса Car
         public enum type
         {
             truck,
             racing,
             passenger
         }
+
         type model;
         public type Model { get { return model; } set { model = value; } }
+
         int weight, age;
         public int Weight { get { return weight; } set { weight = value; } }
         public int Age { get { return age; } set { age = value; } }
@@ -27,6 +35,8 @@ namespace task1
         }
 
     }
+
+// keep blank line between classes
     class Horse
     {
         bool is_shod;
@@ -36,6 +46,7 @@ namespace task1
             steed,
             common
         }
+
         breed type;
         int weight, age, height;
 
@@ -132,6 +143,7 @@ namespace task1
             return type;
         }
     }
+
     class Program
     {
         static void Main(string[] args)

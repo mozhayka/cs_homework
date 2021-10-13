@@ -11,6 +11,7 @@ namespace task4
                 throw new Exception("negative number");
             if (n == 1)
                 return "1";
+
             var divisors = new Dictionary<int, int>();
             var d = 2;
             while (n > 1 && d <= n)
@@ -37,9 +38,11 @@ namespace task4
                     ans += $"{div}";
                 ans += " x ";
             }
+
             return ans.Substring(0, ans.Length - 3); 
         }
     }
+
     class Program
     {
         static void Main(string[] args)
