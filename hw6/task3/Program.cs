@@ -17,7 +17,10 @@ namespace task3
                 next = null;
             }
         }
+
         internal Node head;
+
+        // use auto property instead
         int count = 0;
         public int Count { get { return count; } }
 
@@ -77,8 +80,9 @@ namespace task3
 
         class MyEnumerator : IEnumerator<T>
         {
-            Node head = new Node(default(T));
-            Node cur = null;
+            private Node head = new Node(default(T));
+            private Node cur = null;
+
             public MyEnumerator(Node head)
             {
                 this.head.next = head;
@@ -99,6 +103,14 @@ namespace task3
 
             public bool MoveNext()
             {
+                // лучше избавиться от else и сократить тело метода MoveNext(). например, так:
+/*
+                if (cur == null || cur.next == null)
+                    return false;
+
+                cur = cur.next;
+                return true;
+*/
                 if (cur != null && cur.next != null)
                 {
                     cur = cur.next;
@@ -112,6 +124,7 @@ namespace task3
             {
                 cur = head;
             }
+
             public void Dispose() { }
         }
     }
@@ -134,15 +147,20 @@ namespace task3
             l.Add(2);
             l.Add(3);
             print(l);
+
             l.Remove(2);
             print(l);
+
             l.Remove(2);
             print(l);
+
             l.Remove(2);
             print(l);
+
             l.Add(3);
             print(l);
         }
+
         static void Main(string[] args)
         {
             test();
