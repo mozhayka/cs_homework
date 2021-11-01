@@ -5,7 +5,8 @@ namespace task1
 {
     class Lake
     {
-        int[] stones;
+        private int[] stones;
+
         public Lake(int[] stones)
         {
             this.stones = stones;
@@ -18,9 +19,10 @@ namespace task1
 
         public class LakeEnumerator : IEnumerator<int>
         {
-            int[] stones;
-            int position = -2;
-            int n;
+            private int[] stones;
+            private int position = -2;
+            private int n;
+
             public LakeEnumerator(int[] stones)
             {
                 this.stones = stones;
@@ -41,6 +43,31 @@ namespace task1
 
             public bool MoveNext()
             {
+                // очень много лишних проверок. лучше вынести проверку на четность/нечетность в начало.
+//например
+/*
+                if (position % 2 == 0)
+                {
+                    if (position + 2 < n)
+                    {    
+                      position += 2;
+                      return true;
+                    }
+                    if (position + 2 == n)
+                    {
+                      position++;
+                      return true;
+                    }
+                    ... 
+                }   
+                else if (position > 1)
+                {
+                    position -= 2;
+                    return true;
+                }
+
+
+*/
                 if (position % 2 == 0 && position + 2 < n)
                 {
                     position += 2;
@@ -61,6 +88,7 @@ namespace task1
                     position -= 2;
                     return true;
                 }
+
                 return false;
             }
 
@@ -68,6 +96,7 @@ namespace task1
             {
                 position = 0;
             }
+
             public void Dispose() { }
         }
     }
