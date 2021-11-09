@@ -17,7 +17,8 @@ namespace task1
     class Concat
     {
         public static string DoConcatination(Elem[] elems, string delimeter)
-        {
+        {   // лучше стараться избегать смешивания стилей LINQ - на основе extension-методов и sql-like запросов.
+            // почти всегда можно ограничиться extension-методами 
             return (from el in elems select el.Name)
                 .Skip(3)
                 .Aggregate((x, y) => x + delimeter + y);

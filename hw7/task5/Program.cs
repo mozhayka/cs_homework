@@ -16,7 +16,7 @@ namespace task5
             var page_num = 0;
             var pages = (from word in words
                         select new { 
-                            cur_str = cur_string_size += word.Length + 1, 
+                            cur_str = cur_string_size += word.Length + 1, // это очень неудачная запись. такой код сложно поддерживать 
                             pg_num = cur_string_size <= n ? page_num : ++page_num,
                             new_cur_str = cur_string_size <= n ? cur_string_size : cur_string_size = word.Length,
                             Key = page_num, 
