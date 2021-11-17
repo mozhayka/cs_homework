@@ -3,6 +3,7 @@ using System.Reflection;
 
 namespace task1
 {
+    // старайтесь выделять классы в отдельные файлы. например, будет кстати BlackBox утащить в отдельный файл 
     public class BlackBox
     {
         private int innerValue;

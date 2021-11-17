@@ -11,6 +11,7 @@ namespace task2
         public int RevisionNumber { get; private set; }
         public string Description { get; private set; }
         public string[] Reviewers { get; private set; }
+
         public CustomAttribute(string author, int num, string description, params string[] reviewers)
         {
             this.Author = author;
@@ -48,12 +49,14 @@ namespace task2
             Console.WriteLine($"{name} is written by {attribute.Author}, \n" +
                     $"revision number {attribute.RevisionNumber} \n" +
                     $"description:\n{attribute.Description}\nreviewers:");
+
             foreach(var rev in attribute.Reviewers)
             {
                 Console.WriteLine(rev);
             }
             Console.WriteLine();
         }
+
         private void PrintInfo(MethodInfo method)
         {
             if (method.CustomAttributes.Any(a => a.AttributeType == typeof(CustomAttribute)))

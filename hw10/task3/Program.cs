@@ -7,16 +7,19 @@ namespace task3
     {
         public int Height { get; private set; }
         public int Weight { get; private set; }
+
         public Envelope(int h, int w)
         {
             Height = h;
             Weight = w;
         }
 
+        // для чего введены эти операторы?
         public static bool operator >(Envelope c1, Envelope c2)
         {
             return c1.Height > c2.Height && c1.Weight > c2.Weight;
         }
+
         public static bool operator <(Envelope c1, Envelope c2)
         {
             return c1.Height < c2.Height && c1.Weight < c2.Weight;
@@ -33,6 +36,7 @@ namespace task3
                 .OrderBy(x => x.Weight)
                 .ThenBy(x => x.Height)
                 .ToArray();
+
             for (int i = 0; i < n; i++)
             {
                 maxLen[i] = 1;
@@ -46,10 +50,12 @@ namespace task3
             }
             return maxLen[n - 1];
         }
+
         static void Main(string[] args)
         {
-            var arr = new Envelope[] { new Envelope(5, 4), new Envelope(6, 4),
-                new Envelope(6, 7), new Envelope(2, 3)};
+            //var arr = new Envelope[] { new Envelope(5, 4), new Envelope(6, 4),
+            //    new Envelope(6, 7), new Envelope(2, 3)};
+            var arr = new Envelope[] { new Envelope(5, 4), new Envelope(5, 6), new Envelope(7, 6), new Envelope(7, 8) };
             Console.WriteLine(MaxMatryoshka(arr));
             Console.WriteLine(MaxMatryoshka(new Envelope[] { new Envelope(1, 1), new Envelope(1, 1) }));
         }
