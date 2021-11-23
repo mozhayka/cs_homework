@@ -33,6 +33,7 @@ namespace task1
                 }
             }
         }
+
         static void Main(string[] args)
         {
             Console.WriteLine($"Current directory is '{Environment.CurrentDirectory}'");
