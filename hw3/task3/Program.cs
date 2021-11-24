@@ -13,6 +13,7 @@ namespace task3
             return WriteFraction(num, denom);
         }
 
+	// старайтесь все приватные члены класса называть с маленькой буквы
         private static int GCD(int a, int b)
         {
             if (a < 0)
@@ -35,6 +36,8 @@ namespace task3
 
         private static void ReadFraction(string str, out int num, out int denom)
         {
+            // в качестве аргумента str может придти что угодно. в том числе и тоЮ что не является числом и не распарсится.
+            // такие случаи всегда лучше проверять. Также можно воспользоваться методом TryParse
             string[] numbers = str.Split('/');
             num = int.Parse(numbers[0]);
             denom = int.Parse(numbers[1]);

@@ -2,10 +2,13 @@
 
 namespace task4
 {
+    // между блоками кода оставляйте пустую строку. это повышает читаемость	
     struct Pair
     {
-        long seed;
-        int steps;
+        // не ленитесь указывать модификаторы доступа ко всем членам, даже если уровень доступа очевиден
+        private long seed;
+        private int steps;
+
         public Pair(long seed, int steps)
         {
             this.seed = seed;
@@ -17,32 +20,39 @@ namespace task4
             return $"({seed}, {steps})";
         }
     }
+
+    // все закрытые члены начинайте с маленькой буквы
     class GenPal
     {
         public Pair PalSeq(long palindrome)
         {
             long seed = 1;
             int steps = GenPalBeginningWith(palindrome, seed);
+
             while (steps == -1)
             {
                 seed++;
                 steps = GenPalBeginningWith(palindrome, seed);
             }
+
             return new Pair(seed, steps);
         }
 
         private int GenPalBeginningWith(long palindrome, long seed)
         {
             int steps = 0;
+
             while(seed < palindrome)
             {
                 seed += ReverseInt(seed);
                 steps++;
             }
+
             if(seed == palindrome)
             {
                 return steps;
             }
+
             return -1;
         }
 
@@ -55,6 +65,7 @@ namespace task4
             return long.Parse(s);
         }
     }
+
     class Program
     {
         static void PrintPalSeq(long palindrome)
@@ -62,7 +73,8 @@ namespace task4
             var g = new GenPal();
             Console.WriteLine($"{palindrome} -> {g.PalSeq(palindrome)}");
         }
-        static void Main(string[] args)
+ 
+       static void Main(string[] args)
         {
             PrintPalSeq(1);
             PrintPalSeq(11);
