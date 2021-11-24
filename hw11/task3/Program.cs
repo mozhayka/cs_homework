@@ -16,12 +16,14 @@ namespace task3
                     return file.FullName;
                 }
             }
+
             foreach (DirectoryInfo dir in cur_dir.GetDirectories())
             {
                 var ans = findFile(file_name, dir);
                 if (ans != null)
                     return ans;
             }
+
             return null;
         }
 

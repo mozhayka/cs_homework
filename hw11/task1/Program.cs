@@ -7,6 +7,7 @@ namespace task1
     {
         static int[] GetRandomSuffle()
         {
+            // все загружаете в память. там в задаче 100 000 000
             int n = 1000000;
             var rand = new Random();
             var arr = new int[n];
@@ -24,6 +25,7 @@ namespace task1
 
         static void PrintInFile()
         {
+            // не стоит так хардкодить имя файла
             using (var writer = new StreamWriter("text_file.txt"))
             {
                 var arr = GetRandomSuffle();

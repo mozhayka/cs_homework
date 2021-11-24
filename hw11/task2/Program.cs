@@ -8,6 +8,7 @@ namespace task2
     {
         static string Serialize(BinaryTree tree)
         {
+            // тут нужен StringBuilder, иначе неоптимально используется память в цикле: serialized += code;
             string serialized = "";
             var elem_size = (int)Math.Ceiling(Math.Log2(tree.prev.Length));
             
@@ -59,8 +60,10 @@ namespace task2
             var des_tree = Deserialize(ser_tree);
 
             for (int i = 0; i < prev.Length; i++)
+                // имейте в виду, что Debug.Assert работает только когда вы клмпилируете проект в режиме Debug
                 Debug.Assert(prev[i] == des_tree.prev[i]);
         }
+
         static void Main(string[] args)
         {
             Test(new int[] { 0, 0, 1, 2, 3 });
