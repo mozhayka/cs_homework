@@ -33,15 +33,18 @@ namespace task5
                     else
                         return -1;
                 }
+
                 return C1.CompareTo(C2);
             }
         }
+
         static string sorting(string s)
         {
             var ans = s.ToCharArray();
             Array.Sort(ans, new Comparator());
             return new string(ans);
         }
+
         static void Main(string[] args)
         {
             Console.WriteLine($"eA2a1E -> {sorting("eA2a1E")}");
