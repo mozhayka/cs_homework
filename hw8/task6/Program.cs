@@ -17,7 +17,8 @@ namespace task6
             {
                 ans[i] = String.Concat(ans[i - 1], ans[i - 2]);
             }
-
+            // вместо кода ниже лучше использовать метод String.Join
+            // https://docs.microsoft.com/ru-ru/dotnet/api/system.string.join?view=net-6.0
             var sb = new StringBuilder("");
             foreach(var str in ans)
             {

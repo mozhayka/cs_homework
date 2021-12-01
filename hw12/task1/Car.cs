@@ -8,7 +8,7 @@ namespace task1
 {        
     class Motor
     {
-        bool HasCylinder;
+        private bool HasCylinder;
         public int Power { get; private set; }
 
         public Motor(int power, bool cyl)
@@ -23,14 +23,15 @@ namespace task1
         public int BodyNum { get; private set; }
 
         private Motor motor;
+        // енумераторы и вложенные классы лучше всегда располагать в начале класса
         public enum Gearbox
         {
             auto,
             manual
         }
-
+        // открытые поля - это bad design
         public Gearbox gear;
-        public int stereoSistem { get; set; }
+        public int StereoSistem { get; set; }
 
         public Car(int bodyNum, int motorPower, bool cyl, Gearbox gear, int stereosistem)
         {
