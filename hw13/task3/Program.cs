@@ -34,24 +34,29 @@ namespace task3
 
     public class PrintFooBar
     {
-        private static readonly Mutex _mutex1 = new Mutex(false);
-        private static readonly Mutex _mutex2 = new Mutex(true);
+        private static readonly Mutex _mutex = new Mutex(false);
+        private static bool isFooWorking = true;
 
         public static void printFoo()
         {
-            _mutex1.WaitOne();
+            while(!isFooWorking)
+                Thread.Sleep(10);
+            _mutex.WaitOne();
             Console.Write($"foo");
-            _mutex2.ReleaseMutex();
-            Thread.Sleep(1000);
+            isFooWorking = false;
+            _mutex.ReleaseMutex();
+            
             
         }
 
         public static void printBar()
         {
-            Thread.Sleep(1000);
-            _mutex2.WaitOne();
+            while (isFooWorking)
+                Thread.Sleep(10);
+            _mutex.WaitOne();
             Console.Write($"bar");
-            _mutex1.ReleaseMutex();
+            isFooWorking = true;
+            _mutex.ReleaseMutex();
             
         }
     }
