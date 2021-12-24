@@ -21,6 +21,9 @@ namespace task1
         }
     }
 
+    // Шаблон IDisposable в случае, когда используются неуправляемые ресурсы,
+    // должен иметь финализатор, чтобы гарантировать освобождение ресурсов, даже если вдруг кто-то забыл вызвать Dispose метод
+    // а если ресурсы критически важны, то лучше вообще использовать CriticalFinalizerObject
     class DisposableObject : IDisposable
     {
         private readonly UnmanagedResource _resource;
@@ -31,12 +34,16 @@ namespace task1
         {
             isOld = false;
             _resource = new UnmanagedResource();
+            // timer - это disposable объект, у него тоже нужно удалять ресурсы
+            // в этом случае таймер будет вызывать метод Old каждые max_time милисекунд
+            // для разового запуска можно испольховать Timeout.InfiniteTimeSpan
             _timer = new Timer(Old, null, 0, max_time);
         }
 
         public void Dispose()
         {
             _resource.Clean();
+            //т.к. у класса не задан финализатор, то вызов GC.SuppressFinalize(this) не имеет смысла
             GC.SuppressFinalize(this);
         }
 
