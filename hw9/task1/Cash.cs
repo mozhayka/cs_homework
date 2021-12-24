@@ -34,7 +34,6 @@ namespace task1
             {
                 if (elems[i] == null)
                 {
-                    
                     elems[i] = new DisposableObject(max_time);
                     cur_cnt++;
                     break;

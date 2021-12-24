@@ -16,6 +16,8 @@ namespace task2
             GenerateAllPermuts(new StringBuilder(str));
 
             var ans = new StringBuilder("");
+            // List имеет встроенный метод сортировки sort, так что можно отсортировать permuts
+            // а чтобы список представить в виде строки и вставить между элементами определенный символ (пробел " "), можно использовать String.Join 
             foreach(var word in permuts.Distinct().OrderBy(t => t))
             {
                 ans.Append($"{word} ");
@@ -49,9 +51,9 @@ namespace task2
         static void Main(string[] args)
         {
             var p = new Permut();
-            Console.WriteLine(p.Permutations("AB"));
-            Console.WriteLine(p.Permutations("YAW"));
-            Console.WriteLine(p.Permutations("BACA"));
+            Console.WriteLine(p.Permutations("ABCDEF"));
+            //Console.WriteLine(p.Permutations("YAW"));
+            //Console.WriteLine(p.Permutations("BACA"));
         }
     }
 }
