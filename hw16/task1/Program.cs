@@ -3,11 +3,9 @@ using System.Threading;
 
 namespace task1
 {
-    public class ZeroEvenOdd
+    public class ZeroEvenOdd : IDisposable
     {
         private int n;
-        private int cur;
-        private Action<Action<int>> next;
         AutoResetEvent zero_notify = new AutoResetEvent(true);
         AutoResetEvent even_notify = new AutoResetEvent(false);
         AutoResetEvent odd_notify = new AutoResetEvent(false);
@@ -15,8 +13,6 @@ namespace task1
         public ZeroEvenOdd(int n)
         {
             this.n = n;
-            cur = 1;
-            next = Odd;
         }
         // printNumber(x) outputs "x", where x is an integer. 
 
@@ -57,6 +53,13 @@ namespace task1
                 odd_notify.Reset();
                 zero_notify.Set();
             }
+        }
+
+        public void Dispose()
+        {
+            zero_notify.Dispose();
+            odd_notify.Dispose();
+            even_notify.Dispose();
         }
     }
 
