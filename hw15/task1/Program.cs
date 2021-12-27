@@ -11,6 +11,7 @@ namespace task1
         int curHoney = 0;
         Random rand = new Random();
         CountdownEvent bear;
+        Mutex m = new Mutex();
 
         public Jar(int N, int X)
         {
@@ -39,9 +40,11 @@ namespace task1
         private void AddHoney()
         {
             Thread.Sleep(rand.Next(500, 1000));
+            m.WaitOne();
             curHoney++;
             bear.Signal();
             Console.WriteLine("+ 1");
+            m.ReleaseMutex();
         }
 
         private void EatAll()

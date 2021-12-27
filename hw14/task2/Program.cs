@@ -13,6 +13,7 @@ namespace task2
         public void second() { print("second"); }
         public void third() { print("third"); }
 
+        // Не уверен, насколько это правильное решение, но другого не придумал
         private void print(string s)
         {
             if(s == "first")
