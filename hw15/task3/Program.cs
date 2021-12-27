@@ -9,7 +9,7 @@ namespace task3
     {
         readonly int N;
         int curCnt = 0;
-        Task task;
+        Task task; // лучше переменным давать более осмысленные имена
         AutoResetEvent _notify = new AutoResetEvent(false);
         Mutex m = new Mutex();
         Mutex barber = new Mutex();
@@ -20,13 +20,11 @@ namespace task3
         {
             this.N = N;
             task = new Task(() => Sleep());
-            
         }
 
         public void Run()
         {
             task.Start();
-            
         }
 
         public bool Add()
@@ -84,7 +82,6 @@ namespace task3
             Console.WriteLine("Awake");
             barber.ReleaseMutex();
         }
-
     }
 
     class Program
