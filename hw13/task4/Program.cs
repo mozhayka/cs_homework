@@ -28,6 +28,7 @@ namespace task4
 
             foreach (var thr in threads)
                 thr.Join();
+
             return isRight;
         }
 
@@ -69,6 +70,7 @@ namespace task4
                         return false;
                 }
             }
+
             return true;
         }
     }

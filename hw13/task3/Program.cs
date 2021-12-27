@@ -6,13 +6,14 @@ namespace task3
     public class FooBar
     {
         private int n;
+
         public FooBar(int n)
         {
             this.n = n;
         }
+
         public void Foo(Action printFoo)
         {
-
             for (int i = 0; i < n; i++)
             {
 
@@ -20,9 +21,9 @@ namespace task3
                 printFoo();
             }
         }
+
         public void Bar(Action printBar)
         {
-
             for (int i = 0; i < n; i++)
             {
 
@@ -45,8 +46,6 @@ namespace task3
             Console.Write($"foo");
             isFooWorking = false;
             _mutex.ReleaseMutex();
-            
-            
         }
 
         public static void printBar()
@@ -60,6 +59,7 @@ namespace task3
             
         }
     }
+
     class Program
     {
         static void Main(string[] args)
