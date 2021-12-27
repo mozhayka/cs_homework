@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 
 namespace task1
 {
-    class Jar
+    class Jar : IDisposable
     {
         readonly int beesCnt;
         readonly int capacity;
         int curHoney = 0;
+        private bool bearIsEating = false;
         Random rand = new Random();
         CountdownEvent notifyBear;
         Mutex m = new Mutex();
@@ -46,9 +47,16 @@ namespace task1
         {
             Thread.Sleep(rand.Next(500, 1000));
             m.WaitOne();
-            curHoney++;
-            notifyBear.Signal();
-            Console.WriteLine("+ 1");
+            if (!bearIsEating)
+            {
+                curHoney++;
+                notifyBear.Signal();
+                Console.WriteLine("+ 1");
+                if (curHoney == capacity)
+                {
+                    bearIsEating = true;
+                }
+            }
             bees[num].ContinueWith(t => AddHoney(num));
             m.ReleaseMutex();
         }
@@ -61,6 +69,7 @@ namespace task1
             curHoney = 0;
             Console.WriteLine($"bear is eating honey");
             notifyBear.Reset();
+            bearIsEating = false;
             bear = bear.ContinueWith(t => EatAll());
             m.ReleaseMutex();
         }

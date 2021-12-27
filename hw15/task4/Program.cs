@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace task4
 {
-    class Sorter
+    class Sorter : IDisposable
     {
         int n;
         int p;
