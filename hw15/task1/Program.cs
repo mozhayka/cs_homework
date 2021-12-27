@@ -50,9 +50,17 @@ namespace task1
         private void EatAll()
         {
             bear.Wait();
+            m.WaitOne();
             curHoney = 0;
             Console.WriteLine($"bear is eating honey");
             bear.Reset();
+            m.ReleaseMutex();
+        }
+
+        public void Dispose()
+        {
+            bear.Dispose();
+            m.Dispose();
         }
     }
 
