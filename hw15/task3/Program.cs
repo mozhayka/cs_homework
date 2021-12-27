@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,12 +14,19 @@ namespace task3
         Mutex m = new Mutex();
         Mutex barber = new Mutex();
         Random rand = new Random();
+        Task lastTask;
 
         public Barbershop(int N)
         {
             this.N = N;
             task = new Task(() => Sleep());
+            
+        }
+
+        public void Run()
+        {
             task.Start();
+            
         }
 
         public bool Add()
@@ -31,12 +39,26 @@ namespace task3
                 return false;
             }
             curCnt++;
-            task.ContinueWith(t => Haircut());
+            lastTask = task.ContinueWith(t => Haircut());
             Console.WriteLine("Succesfully added");
 
             _notify.Set();
             m.ReleaseMutex();
             return true;
+        }
+
+        public void WaitLastHaircut()
+        {
+            lastTask.Wait();
+        }
+
+        public void Dispose()
+        {
+            task.Dispose();
+            _notify.Dispose();
+            m.Dispose();
+            barber.Dispose();
+            lastTask.Dispose();
         }
 
         private void Haircut()
@@ -48,7 +70,7 @@ namespace task3
             if(curCnt == 0)
             {
                 _notify.Reset();
-                task.ContinueWith(t => Sleep());
+                lastTask = task.ContinueWith(t => Sleep(), TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             Console.WriteLine("Haircut ended");
             barber.ReleaseMutex();
@@ -63,13 +85,8 @@ namespace task3
             barber.ReleaseMutex();
         }
 
-        public void Dispose()
-        {
-            _notify.Dispose();
-            m.Dispose();
-            barber.Dispose();
-        }
     }
+
     class Program
     {
         static void Test()
@@ -77,10 +94,12 @@ namespace task3
             var b = new Barbershop(3);
             b.Add();
             b.Add();
+            b.Run();
             b.Add();
             b.Add();
             Thread.Sleep(5000);
             b.Add();
+            b.WaitLastHaircut();
         }
         static void Main(string[] args)
         {
